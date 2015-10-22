@@ -19,6 +19,7 @@ namespace CombateMultiplayer
             Dimension.Y = 0.0125f;
             geraRetanguloDeDesenho();
             Direçao = direçao;
+            isSolid = false;
           //img.RotateFlip(RotateFlipType.RotateNoneFlipX);
             
 

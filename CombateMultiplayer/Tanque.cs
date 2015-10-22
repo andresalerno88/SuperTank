@@ -100,10 +100,10 @@ namespace CombateMultiplayer
                         Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1));
                         break;
                     case 2:
-                        Jogo.Sprites.Add(new Tirinho(Dimension.X + 0.052f, Dimension.Y + 0.015f, 2));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2));
                         break;
                     case 3:
-                        Jogo.Sprites.Add(new Tirinho(Dimension.X + 0.015f, Dimension.Y + 0.052f, 3));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3));
                         break;
                 
                 }
