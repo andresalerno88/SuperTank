@@ -63,17 +63,16 @@ namespace CombateMultiplayer
             Sprites.Add(Tanque1);
             Sprites.Add(Tanque2);
 
-            for (int v = 0; v < 1; v++)
+            for (int v = 0; v < 10; v++)
             {
-                Sprites.Add(new Obstaculo(0.15f,0.2f+ 0.08f * v, this));
-                /*
-                Sprites.Add(new Obstaculo(0.16f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.85f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.86f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.30f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.31f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.70f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.71f, 0.2f + 0.08f * v, this));*/
+                Sprites.Add(new Obstaculo(0.15f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.16f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.85f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.86f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.30f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.31f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.70f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.71f, 0.1f + 0.09f * v, this));
             }
         }
 

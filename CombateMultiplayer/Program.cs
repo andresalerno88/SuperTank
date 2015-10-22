@@ -16,7 +16,7 @@ namespace CombateMultiplayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TelaInicial());
+            //Application.Run(new TelaInicial());
             Application.Run(new TelaDeJogo(1,"192.168.0.1",1138));
         }
     }
