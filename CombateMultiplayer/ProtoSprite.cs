@@ -34,6 +34,7 @@ namespace CombateMultiplayer
         protected int numQuadrosParado, numQuadrosMovendo;
         int QuadroAtual;
         protected bool isMoving=false;
+        public bool isSolid= true;
 
         protected Image img = (Image)Properties.Resources.ResourceManager.GetObject("ImageNOTFOUND");
 
@@ -73,6 +74,7 @@ namespace CombateMultiplayer
         }
 
         public void move(float x, float y){
+
             Position.X += x;
             Position.Y += y;
             RetanguloDeDesenho.X = (int)(Position.X * Resoluçao.X);

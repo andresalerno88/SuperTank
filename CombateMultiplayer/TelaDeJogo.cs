@@ -63,16 +63,17 @@ namespace CombateMultiplayer
             Sprites.Add(Tanque1);
             Sprites.Add(Tanque2);
 
-            for (int v = 0; v < 10; v++)
+            for (int v = 0; v < 1; v++)
             {
                 Sprites.Add(new Obstaculo(0.15f,0.2f+ 0.08f * v, this));
+                /*
                 Sprites.Add(new Obstaculo(0.16f, 0.2f + 0.08f * v, this));
                 Sprites.Add(new Obstaculo(0.85f, 0.2f + 0.08f * v, this));
                 Sprites.Add(new Obstaculo(0.86f, 0.2f + 0.08f * v, this));
                 Sprites.Add(new Obstaculo(0.30f, 0.2f + 0.08f * v, this));
                 Sprites.Add(new Obstaculo(0.31f, 0.2f + 0.08f * v, this));
                 Sprites.Add(new Obstaculo(0.70f, 0.2f + 0.08f * v, this));
-                Sprites.Add(new Obstaculo(0.71f, 0.2f + 0.08f * v, this));
+                Sprites.Add(new Obstaculo(0.71f, 0.2f + 0.08f * v, this));*/
             }
         }
 
@@ -173,7 +174,7 @@ namespace CombateMultiplayer
             switch (tanqueLocal)
             {
                     
-                        case 1:
+                case 1:
                     Tanque1.Botoes(TeclasDeMovimentoPressionada.Peek());
                     server.recebeTecla(TeclasDeMovimentoPressionada.Peek());
                     break;
@@ -222,7 +223,24 @@ namespace CombateMultiplayer
 
         }
 
+        public List<ProtoSprite> GetCollisions(ProtoSprite este) {
+            List<ProtoSprite> lista = new List<ProtoSprite>();
+            foreach (ProtoSprite outro in Sprites)
+            {
+                if (este != outro)
+                {
+                    if (este.ColideCom(outro))
+                    {
+                        lista.Add(outro);
+                    }
+                }
+            }
 
+
+           
+            return lista;            
+            
+        }
 
 
 

@@ -32,6 +32,16 @@ namespace CombateMultiplayer
             numQuadrosMovendo = 4;
         }
 
+        public bool colideComSólido() {
+            foreach (ProtoSprite p in Jogo.GetCollisions(this))
+            {
+                if (p.isSolid) {
+                    return true;
+                }
+            }
+            return false;            
+        }
+
 
         public void Botoes(String dedadaDetectada)
         {
@@ -42,25 +52,41 @@ namespace CombateMultiplayer
             if (dedadaDetectada == Keys.Down.ToString())
             {
                 isMoving = true;
-                move( 0 ,Velocidade); 
+                move(0, Velocidade); 
+                if (colideComSólido())
+                {
+                    move(0, -Velocidade); 
+                }
                 Direçao = 3;
             }
             if (dedadaDetectada == Keys.Up.ToString())
             {
                 isMoving = true;
-                move(0,-Velocidade); 
+                move(0,-Velocidade);
+                if (colideComSólido())
+                {
+                    move(0, Velocidade);
+                }
                 Direçao = 1;
             }
             if (dedadaDetectada == Keys.Right.ToString())
             {
                 isMoving = true;
-                move(Velocidade, 0); 
+                move(Velocidade, 0);
+                if (colideComSólido())
+                {
+                    move(-Velocidade, 0);
+                }
                 Direçao = 2;
             }
             if (dedadaDetectada == Keys.Left.ToString())
             {
                 isMoving = true;
-                move(-Velocidade,0); 
+                move(-Velocidade, 0);
+                if (colideComSólido())
+                {
+                    move(Velocidade, 0);
+                }
                 Direçao = 0;
             }
             if (dedadaDetectada == Keys.Space.ToString())
