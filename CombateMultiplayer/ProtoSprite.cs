@@ -120,16 +120,5 @@ namespace CombateMultiplayer
             
         }
 
-        public bool ColideCom(ProtoSprite other)
-        {
-            if((this.Position.X>other.Position.X + other.Dimension.X)&&(other.Position.X<this.Position.X+this.Dimension.X)){
-                if ((this.Position.Y > other.Position.Y + other.Dimension.Y) && (other.Position.Y < this.Position.Y + this.Dimension.Y))
-                {
-                    return true;
-                }            
-            }
-            return false;
-        }
-
     }
 }

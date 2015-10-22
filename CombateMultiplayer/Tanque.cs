@@ -63,24 +63,24 @@ namespace CombateMultiplayer
                 move(-Velocidade,0); 
                 Direçao = 0;
             }
-            if (dedadaDetectada == Keys.A.ToString())
-            {/*
+            if (dedadaDetectada == Keys.Space.ToString())
+            {
                 switch (Direçao)
                 {
                     case 0:
-                        Jogo.Sprites.Add(new Tirinho(RetanguloDeDesenho.X - 12, RetanguloDeDesenho.Y + 15, 0));
+                        Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0));
                         break;
                     case 1:
-                        Jogo.Sprites.Add(new Tirinho(RetanguloDeDesenho.X + 15, RetanguloDeDesenho.Y -12, 1));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1));
                         break;
                     case 2:
-                        Jogo.Sprites.Add(new Tirinho(RetanguloDeDesenho.X + 52, RetanguloDeDesenho.Y + 15, 2));
+                        Jogo.Sprites.Add(new Tirinho(Dimension.X + 0.052f, Dimension.Y + 0.015f, 2));
                         break;
                     case 3:
-                        Jogo.Sprites.Add(new Tirinho(RetanguloDeDesenho.X + 15, RetanguloDeDesenho.Y + 52, 3));
+                        Jogo.Sprites.Add(new Tirinho(Dimension.X + 0.015f, Dimension.Y + 0.052f, 3));
                         break;
                 
-                }*/
+                }
             }
         }
         /*
