@@ -35,6 +35,16 @@ namespace CombateMultiplayer
 
         const int DimensaoDaTelaX = 800, DimensaoDaTelaY = 600;
 
+        public Tanque outroTanque(Tanque t) {
+            if (t.Equals(Tanque1))
+            {
+                return Tanque2;
+            }else{
+                return Tanque1;
+            }
+        
+        }
+
         public int posiçaoInteiraX(double a) {
             return (int)(a * DimensaoDaTelaX);
         

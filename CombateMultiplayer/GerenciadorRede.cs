@@ -3,6 +3,7 @@ using System.Text;
 
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.Generic;
 
 namespace CombateMultiplayer
 {
@@ -13,6 +14,8 @@ namespace CombateMultiplayer
         Tanque Tanque =null;
         int Port = 1138;
         string Ip;
+
+        Queue<Byte[]> FilaDeMensagens;
 
         TcpListener listener = null;
 
@@ -41,10 +44,8 @@ namespace CombateMultiplayer
                 {
                     Environment.Exit(e.ErrorCode);
                 }
-            
-            
-            
-            }  
+            }
+            FilaDeMensagens = new Queue<byte[]>();
         }
 
         public void inicia() {
@@ -113,16 +114,26 @@ namespace CombateMultiplayer
 
         private void RecebimentoMensagem11(string str, string ip)
         {
+            Tanque tanqueAdversario = Tanque.Jogo.outroTanque(Tanque);
             string[] strings = str.Split(new Char[] { '|' });
-            string posX, posY, dir;
-            posX = strings[0];
-            posY = strings[1];
-            dir = strings[2];
+            float posX, posY;
+                int dir;
+            posX = float.Parse(strings[0]);
+            posY = float.Parse(strings[1]);
+            dir = int.Parse(strings[2]);
 
 
-
+            tanqueAdversario.move(tanqueAdversario.Position.X - posX, tanqueAdversario.Position.Y - posY);
+            EnviaMensagem12(posX,posY,dir);
         }
 
+        private void EnviaMensagem12(float posX,float posY, int dir) {
+            string msg = (posX + "|"+ posY +"|"+dir);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("12" + string.Format("{0:000}", msg.Length+5) + msg);
+
+            FilaDeMensagens.Enqueue(byteMsg);
+        
+        }
 
         void Comunica1(){            
 
