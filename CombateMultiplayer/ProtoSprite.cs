@@ -82,10 +82,11 @@ namespace CombateMultiplayer
         
         }
 
-        public void moveTo(float x, float y)
+        public void moveTo(float x, float y,int dir)
         {
             Position.X = x;
             Position.Y = y;
+            Direçao = dir;
             RetanguloDeDesenho.X = (int)(Position.X * Resoluçao.X);
             RetanguloDeDesenho.Y = (int)(Position.Y * Resoluçao.Y);
 

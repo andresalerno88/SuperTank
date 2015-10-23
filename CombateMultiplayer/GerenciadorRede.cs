@@ -95,27 +95,29 @@ namespace CombateMultiplayer
         void pegaTeclas() {
             if (TeclaPressionada != null)
             {
+
+                Tanque outro = Tanque.Jogo.outroTanque(Tanque);
                 switch (TeclaPressionada)
                 {
                     case "Left":
                         {
-                            EnviaMensagem11((Tanque.Position.X - Tanque.Velocidade), Tanque.Position.Y, 0);
+                            EnviaMensagem11((outro.Position.X - outro.Velocidade), outro.Position.Y, 0);
                              break;
                         }
                     case "Up":
                         {
-                            EnviaMensagem11(Tanque.Position.X , Tanque.Position.Y-Tanque.Velocidade, 1);
+                            EnviaMensagem11(outro.Position.X , outro.Position.Y-outro.Velocidade, 1);
                             break;
                         }
                     case "Right":{
 
 
-                        EnviaMensagem11((Tanque.Position.X + Tanque.Velocidade), Tanque.Position.Y, 2);
+                        EnviaMensagem11((outro.Position.X + outro.Velocidade), outro.Position.Y, 2);
                             break;
                     }
                     case "Down":
                         {
-                            EnviaMensagem11(Tanque.Position.X, Tanque.Position.Y + Tanque.Velocidade, 3);
+                            EnviaMensagem11(outro.Position.X, outro.Position.Y + outro.Velocidade, 3);
                             break;
                         }
                     default:
