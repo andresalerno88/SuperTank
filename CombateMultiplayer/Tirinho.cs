@@ -11,6 +11,7 @@ namespace CombateMultiplayer
     {
         Image img = (Image)Properties.Resources.ResourceManager.GetObject("Tiro");
         float Velocidade = 0.01f;
+
         public Tirinho(float x,float y,int direçao)
         {
             Position.X = x;
@@ -20,6 +21,7 @@ namespace CombateMultiplayer
             geraRetanguloDeDesenho();
             Direçao = direçao;
             isSolid = false;
+            RetanguloSpritesheet.Height = 2; //TODO Adequar ao sprite
           //img.RotateFlip(RotateFlipType.RotateNoneFlipX);
             
 

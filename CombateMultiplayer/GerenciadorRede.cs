@@ -96,6 +96,12 @@ namespace CombateMultiplayer
 
                         break;
                     }
+                case 11:
+                    {
+                        RecebimentoMensagem11(new String(msg), ip);
+
+                        break;
+                    }
 
             }
         }
@@ -103,6 +109,18 @@ namespace CombateMultiplayer
         private void RecebimentoMensagem10(string p, string ip)
         {
             Tanque.Jogo.StartGame();
+        }
+
+        private void RecebimentoMensagem11(string str, string ip)
+        {
+            string[] strings = str.Split(new Char[] { '|' });
+            string posX, posY, dir;
+            posX = strings[0];
+            posY = strings[1];
+            dir = strings[2];
+
+
+
         }
 
 
