@@ -31,6 +31,8 @@ namespace CombateMultiplayer
 
         int Porto;
 
+        bool gamePaused = true;
+
         Stack<string> TeclasDeMovimentoPressionada;
 
         const int DimensaoDaTelaX = 800, DimensaoDaTelaY = 600;
@@ -116,7 +118,6 @@ namespace CombateMultiplayer
             clockAnimation.Tick += AnimateAll;
             clockAnimation.Interval = 80;
 
-           // StartGame();
         }
 
         public void PauseGame()
@@ -126,8 +127,11 @@ namespace CombateMultiplayer
         }
 
         public void StartGame() {
-            clockUpdate.Start();
-            clockAnimation.Start();
+
+            pictureBox1.Invoke((MethodInvoker)delegate() { clockUpdate.Start(); });
+            pictureBox1.Invoke((MethodInvoker)delegate() { clockAnimation.Start(); });
+            
+            
         }
         
 
@@ -138,11 +142,11 @@ namespace CombateMultiplayer
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
                     server.inicia();
-                    Invoke((MethodInvoker)delegate() { server.EnviaMensagem10(); });
+                    server.EnviaMensagem10();
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque2, Porto, IP, true);
-                    Invoke((MethodInvoker)delegate() { client.EnviaMensagem10(); });
+                    client.EnviaMensagem10();
                     client.Comunica2();
                     break;
             }
