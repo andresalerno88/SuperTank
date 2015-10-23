@@ -145,7 +145,7 @@ namespace CombateMultiplayer
                     server.EnviaMensagem10();
                     break;
                 case 2:
-                    client = new GerenciadorDeRede(Tanque2, Porto, IP, true);
+                    client = new GerenciadorDeRede(Tanque1, Porto, IP, true);
                     client.EnviaMensagem10();
                     client.Comunica2();
                     break;

@@ -77,11 +77,13 @@ namespace CombateMultiplayer
 
         void write()
         {
-            if (FilaDeMensagens.Count>0)
+            if (FilaDeMensagens.Count > 0)
             {
-                foreach (byte[] msg in FilaDeMensagens)
+                while (FilaDeMensagens.Count > 0)
                 {
+                    byte[] msg = FilaDeMensagens.Dequeue();
                     stream.Write(msg, 0, msg.Length);
+                    
                 }
             }
             else
