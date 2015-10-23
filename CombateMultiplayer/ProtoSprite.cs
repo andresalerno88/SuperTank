@@ -82,6 +82,15 @@ namespace CombateMultiplayer
         
         }
 
+        public void moveTo(float x, float y)
+        {
+            Position.X = x;
+            Position.Y = y;
+            RetanguloDeDesenho.X = (int)(Position.X * Resoluçao.X);
+            RetanguloDeDesenho.Y = (int)(Position.Y * Resoluçao.Y);
+
+        }
+
         public bool ColideCom(ProtoSprite other)
         {
             if ((this.Position.X < other.Position.X + other.Dimension.X) && (other.Position.X < this.Position.X + this.Dimension.X))

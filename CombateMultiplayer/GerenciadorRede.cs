@@ -88,7 +88,7 @@ namespace CombateMultiplayer
             }
             else
             {
-                stream.Write(new byte[1], 0, 1);
+                stream.Write(new byte[2], 0, 2);
             }
         }
 
@@ -121,6 +121,7 @@ namespace CombateMultiplayer
                     default:
                         break;
                 }
+                TeclaPressionada = null;
             }
         
         
@@ -147,27 +148,30 @@ namespace CombateMultiplayer
 
         void ProcessData(string cadeia)
         {
-            int codigo, tamanho;
-            codigo = int.Parse(cadeia[0].ToString() + cadeia[1].ToString());
-            tamanho = int.Parse(cadeia[2].ToString() + cadeia[3].ToString() + cadeia[4].ToString());
-            char[] msg = new char[tamanho - 5];
-            cadeia.CopyTo(5, msg, 0, tamanho - 5);
-
-            switch (codigo)
+            if (cadeia.Length > 4)
             {
-                case 10:
-                    {
-                        RecebimentoMensagem10(new String(msg));
+                int codigo, tamanho;
+                codigo = int.Parse(cadeia[0].ToString() + cadeia[1].ToString());
+                tamanho = int.Parse(cadeia[2].ToString() + cadeia[3].ToString() + cadeia[4].ToString());
+                char[] msg = new char[tamanho - 5];
+                cadeia.CopyTo(5, msg, 0, tamanho - 5);
 
-                        break;
-                    }
-                case 11:
-                    {
-                        RecebimentoMensagem11(new String(msg));
+                switch (codigo)
+                {
+                    case 10:
+                        {
+                            RecebimentoMensagem10(new String(msg));
 
-                        break;
-                    }
+                            break;
+                        }
+                    case 11:
+                        {
+                            RecebimentoMensagem11(new String(msg));
 
+                            break;
+                        }
+
+                }
             }
         }
 
@@ -178,7 +182,6 @@ namespace CombateMultiplayer
 
         private void RecebimentoMensagem11(string str)
         {
-            Tanque tanqueAdversario = Tanque.Jogo.outroTanque(Tanque);
             string[] strings = str.Split(new Char[] { '|' });
             float posX, posY;
                 int dir;
@@ -187,7 +190,7 @@ namespace CombateMultiplayer
             dir = int.Parse(strings[2]);
 
 
-            tanqueAdversario.move(tanqueAdversario.Position.X - posX, tanqueAdversario.Position.Y - posY);
+            Tanque.moveTo(posX, posY,dir);
             EnviaMensagem12(posX,posY,dir);
         }
 

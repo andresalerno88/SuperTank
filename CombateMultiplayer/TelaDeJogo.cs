@@ -130,8 +130,11 @@ namespace CombateMultiplayer
 
             pictureBox1.Invoke((MethodInvoker)delegate() { clockUpdate.Start(); });
             pictureBox1.Invoke((MethodInvoker)delegate() { clockAnimation.Start(); });
-            
-            
+
+            if (tanqueLocal == 1) {
+
+                server.EnviaMensagem10();
+            }
         }
         
 
@@ -142,7 +145,6 @@ namespace CombateMultiplayer
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
                     server.inicia();
-                    server.EnviaMensagem10();
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque1, Porto, IP, true);
