@@ -138,10 +138,11 @@ namespace CombateMultiplayer
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
                     server.inicia();
-                    server.EnviaMensagem10();
+                    Invoke((MethodInvoker)delegate() { server.EnviaMensagem10(); });
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque2, Porto, IP, true);
+                    Invoke((MethodInvoker)delegate() { client.EnviaMensagem10(); });
                     client.Comunica2();
                     break;
             }
