@@ -29,8 +29,8 @@ namespace CombateMultiplayer
         private void button1_Click(object sender, EventArgs e)
         {
             EnviaMsg04();
-            Form f = new TelaDeJogo(1, IP,1138);
-            f.Show();
+            TelaDeJogo jogo = new TelaDeJogo(1, IP,1138);
+            jogo.Show();
         }
 
         private void EnviaMsg04()

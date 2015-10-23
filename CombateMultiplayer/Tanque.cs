@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace CombateMultiplayer
 {
-    class Tanque : ProtoSprite
+    public class Tanque : ProtoSprite
     {
 
         public TelaDeJogo Jogo;
-        float Velocidade = 0.005f;
+        public float Velocidade = 0.005f;
 
         public Tanque(float x,float y,int direçao, TelaDeJogo j,int resoluçaoX,int resoluçaoY)
         {

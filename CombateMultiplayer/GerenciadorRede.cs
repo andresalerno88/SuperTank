@@ -59,14 +59,8 @@ namespace CombateMultiplayer
             
         }
 
-        void read(ref Byte[] byteStream){
 
-            int bytesReceived = stream.Read(byteStream, 0, BUFFER_SIZE);
-            Tanque.Botoes(Encoding.ASCII.GetString(byteStream,0, bytesReceived));
-
-        }
-
-        void write()
+        void writeAntiquado()
         {
             if (TeclaPressionada != null)
             {
@@ -81,7 +75,75 @@ namespace CombateMultiplayer
             }
         }
 
-        void ProcessData(string cadeia, string ip)
+        void write()
+        {
+            if (FilaDeMensagens.Count>0)
+            {
+                foreach (byte[] msg in FilaDeMensagens)
+                {
+                    stream.Write(msg, 0, msg.Length);
+                }
+            }
+            else
+            {
+                stream.Write(new byte[1], 0, 1);
+            }
+        }
+
+        void pegaTeclas() {
+            if (TeclaPressionada != null)
+            {
+                switch (TeclaPressionada)
+                {
+                    case "Left":
+                        {
+                            EnviaMensagem11((Tanque.Position.X - Tanque.Velocidade), Tanque.Position.Y, 0);
+                             break;
+                        }
+                    case "Up":
+                        {
+                            EnviaMensagem11(Tanque.Position.X , Tanque.Position.Y-Tanque.Velocidade, 1);
+                            break;
+                        }
+                    case "Right":{
+
+
+                        EnviaMensagem11((Tanque.Position.X + Tanque.Velocidade), Tanque.Position.Y, 2);
+                            break;
+                    }
+                    case "Down":
+                        {
+                            EnviaMensagem11(Tanque.Position.X, Tanque.Position.Y + Tanque.Velocidade, 3);
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        
+        
+        }
+
+
+        void readAntiquado(ref Byte[] byteStream)
+        {
+
+            int bytesReceived = stream.Read(byteStream, 0, BUFFER_SIZE);
+            Tanque.Botoes(Encoding.ASCII.GetString(byteStream, 0, bytesReceived));
+
+        }
+
+
+        void read(ref Byte[] byteStream)
+        {
+
+            int bytesReceived = stream.Read(byteStream, 0, BUFFER_SIZE);
+            ProcessData(Encoding.ASCII.GetString(byteStream, 0, bytesReceived));
+
+        }
+
+
+        void ProcessData(string cadeia)
         {
             int codigo, tamanho;
             codigo = int.Parse(cadeia[0].ToString() + cadeia[1].ToString());
@@ -93,13 +155,13 @@ namespace CombateMultiplayer
             {
                 case 10:
                     {
-                        RecebimentoMensagem10(new String(msg), ip);
+                        RecebimentoMensagem10(new String(msg));
 
                         break;
                     }
                 case 11:
                     {
-                        RecebimentoMensagem11(new String(msg), ip);
+                        RecebimentoMensagem11(new String(msg));
 
                         break;
                     }
@@ -107,12 +169,12 @@ namespace CombateMultiplayer
             }
         }
 
-        private void RecebimentoMensagem10(string p, string ip)
+        private void RecebimentoMensagem10(string p)
         {
             Tanque.Jogo.StartGame();
         }
 
-        private void RecebimentoMensagem11(string str, string ip)
+        private void RecebimentoMensagem11(string str)
         {
             Tanque tanqueAdversario = Tanque.Jogo.outroTanque(Tanque);
             string[] strings = str.Split(new Char[] { '|' });
@@ -127,12 +189,29 @@ namespace CombateMultiplayer
             EnviaMensagem12(posX,posY,dir);
         }
 
-        private void EnviaMensagem12(float posX,float posY, int dir) {
-            string msg = (posX + "|"+ posY +"|"+dir);
-            byte[] byteMsg = Encoding.ASCII.GetBytes("12" + string.Format("{0:000}", msg.Length+5) + msg);
+        public void EnviaMensagem10()
+        {
+            byte[] byteMsg = Encoding.ASCII.GetBytes("10005");
+
+            FilaDeMensagens.Enqueue(byteMsg);
+
+        }
+
+        private void EnviaMensagem11(float posX, float posY,int dir) {
+            string msg = (posX + "|" + posY + "|" + dir);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("11" + string.Format("{0:000}", msg.Length+5) + msg);
 
             FilaDeMensagens.Enqueue(byteMsg);
         
+        }
+
+        private void EnviaMensagem12(float posX, float posY, int dir)
+        {
+            string msg = (posX + "|" + posY + "|" + dir);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("12" + string.Format("{0:000}", msg.Length + 5) + msg);
+
+            FilaDeMensagens.Enqueue(byteMsg);
+
         }
 
         void Comunica1(){            
@@ -147,7 +226,7 @@ namespace CombateMultiplayer
                         Byte[] byteStream = new byte[BUFFER_SIZE];
 
                         read(ref byteStream);
-                        
+                        pegaTeclas();
                         write();
                        
                     }
@@ -178,6 +257,7 @@ namespace CombateMultiplayer
 
                     Byte[] byteStream = new byte[BUFFER_SIZE];
 
+                    pegaTeclas();
                     write();
                     read(ref byteStream);
 

@@ -116,7 +116,7 @@ namespace CombateMultiplayer
             clockAnimation.Tick += AnimateAll;
             clockAnimation.Interval = 80;
 
-            StartGame();
+           // StartGame();
         }
 
         public void PauseGame()
@@ -138,6 +138,7 @@ namespace CombateMultiplayer
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
                     server.inicia();
+                    server.EnviaMensagem10();
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque2, Porto, IP, true);
