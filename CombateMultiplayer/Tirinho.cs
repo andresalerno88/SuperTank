@@ -11,13 +11,15 @@ namespace CombateMultiplayer
     {
         Image img = (Image)Properties.Resources.ResourceManager.GetObject("Tiro");
         float Velocidade = 0.01f;
+        TelaDeJogo Jogo;
 
-        public Tirinho(float x,float y,int direçao)
+        public Tirinho(float x,float y,int direçao,TelaDeJogo j)
         {
             Position.X = x;
             Position.Y = y;
             Dimension.X = 0.0125f;
             Dimension.Y = 0.0125f;
+            Jogo = j;
             geraRetanguloDeDesenho();
             Direçao = direçao;
             isSolid = false;
@@ -45,6 +47,32 @@ namespace CombateMultiplayer
                     break;
 
             }
+            colideComAlvo();
         }
+
+        public bool colideComAlvo()
+        {
+            foreach (ProtoSprite p in Jogo.GetCollisions(this))
+            {
+                if (p is Tanque)
+                {
+                    Tanque aux = (Tanque)p;
+                    aux.Desativa();
+                }
+                if (p is Obstaculo)
+                {
+                    Destroi(p);
+                    Destroi(this);
+                }
+
+            }
+            return false;
+        }
+
+        private void Destroi(ProtoSprite p)
+        {
+            Jogo.SpritesASeremDeletados.Add(p);
+        }
+
     }
 }

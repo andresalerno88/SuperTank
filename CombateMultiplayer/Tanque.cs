@@ -12,7 +12,7 @@ namespace CombateMultiplayer
     {
 
         public TelaDeJogo Jogo;
-        public float Velocidade = 0.1f *(GlobalConfigurations.UPDATEINTERVAL/1000f);
+        public float Velocidade = 1f *(GlobalConfigurations.UPDATEINTERVAL/1000f);
 
         public Tanque(float x,float y,int direçao, TelaDeJogo j,int resoluçaoX,int resoluçaoY)
         {
@@ -30,6 +30,10 @@ namespace CombateMultiplayer
             RetanguloSpritesheet.Height = 90;
             numQuadrosParado = 3;
             numQuadrosMovendo = 4;
+        }
+
+        public void Desativa() { 
+        
         }
 
         public bool colideComSólido() {
@@ -55,7 +59,10 @@ namespace CombateMultiplayer
                 move(0, Velocidade); 
                 if (colideComSólido())
                 {
-                    move(0, -Velocidade); 
+                    move(0, -Velocidade);
+                }
+                else if (SaiuDaTela()) {
+                    move(0, -Velocidade);
                 }
                 Direçao = 3;
             }
@@ -64,6 +71,10 @@ namespace CombateMultiplayer
                 isMoving = true;
                 move(0,-Velocidade);
                 if (colideComSólido())
+                {
+                    move(0, Velocidade);
+                }
+                else if (SaiuDaTela())
                 {
                     move(0, Velocidade);
                 }
@@ -77,6 +88,10 @@ namespace CombateMultiplayer
                 {
                     move(-Velocidade, 0);
                 }
+                else if (SaiuDaTela())
+                {
+                    move(-Velocidade, 0);
+                }
                 Direçao = 2;
             }
             if (dedadaDetectada == Keys.Left.ToString())
@@ -87,6 +102,10 @@ namespace CombateMultiplayer
                 {
                     move(Velocidade, 0);
                 }
+                else if (SaiuDaTela())
+                {
+                    move(Velocidade, 0);
+                }
                 Direçao = 0;
             }
             if (dedadaDetectada == Keys.Space.ToString())
@@ -94,20 +113,30 @@ namespace CombateMultiplayer
                 switch (Direçao)
                 {
                     case 0:
-                        Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0));
+                        Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0,Jogo));
                         break;
                     case 1:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, Jogo));
                         break;
                     case 2:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, Jogo));
                         break;
                     case 3:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3));
+                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, Jogo));
                         break;
                 
                 }
             }
+        }
+
+        private bool SaiuDaTela()
+        {
+            if(this.Position.X<0 || this.Position.Y <= 0.1 || this.Position.X + this.Dimension.X > 1 || this.Position.Y + this.Dimension.Y >1){
+
+                return true;
+            }
+
+            return false;
         }
         /*
         public override void Draw(Graphics desenhista)

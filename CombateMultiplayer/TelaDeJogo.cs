@@ -28,6 +28,7 @@ namespace CombateMultiplayer
         Thread t;
         String IP;
         public List<ProtoSprite> Sprites;
+        public List<ProtoSprite> SpritesASeremDeletados;
 
         int Porto;
 
@@ -66,6 +67,7 @@ namespace CombateMultiplayer
 
         private void InicializaObjetos() {
             Sprites = new List<ProtoSprite>();
+            SpritesASeremDeletados = new List<ProtoSprite>();
 
             Tanque1 = new Tanque(0, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
             Tanque2 = new Tanque(0.95f, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
@@ -157,7 +159,17 @@ namespace CombateMultiplayer
         public void Update(object sender, EventArgs e)
         {
             UpdateObjects();
+            Cleanup();
 
+        }
+
+        private void Cleanup()
+        {
+            foreach (ProtoSprite p in SpritesASeremDeletados)
+            {
+                Sprites.Remove(p);
+            }
+            SpritesASeremDeletados.Clear();
         }
 
         public void Draw(object sender, EventArgs e)
