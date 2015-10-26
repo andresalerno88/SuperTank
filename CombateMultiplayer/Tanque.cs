@@ -12,7 +12,7 @@ namespace CombateMultiplayer
     {
 
         public TelaDeJogo Jogo;
-        public float Velocidade = 0.005f;
+        public float Velocidade = 0.1f *(GlobalConfigurations.UPDATEINTERVAL/1000f);
 
         public Tanque(float x,float y,int direçao, TelaDeJogo j,int resoluçaoX,int resoluçaoY)
         {

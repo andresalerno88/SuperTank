@@ -31,8 +31,6 @@ namespace CombateMultiplayer
 
         int Porto;
 
-        bool gamePaused = true;
-
         Stack<string> TeclasDeMovimentoPressionada;
 
         const int DimensaoDaTelaX = 800, DimensaoDaTelaY = 600;
@@ -107,17 +105,19 @@ namespace CombateMultiplayer
 
             clockUpdate = new System.Windows.Forms.Timer();
             clockUpdate.Tick += Update;
-            clockUpdate.Interval = 5;
+            clockUpdate.Interval = GlobalConfigurations.UPDATEINTERVAL;
 
             clockRefresh = new System.Windows.Forms.Timer();
             clockRefresh.Tick += Draw;
-            clockRefresh.Interval = 4;
+            clockRefresh.Interval = GlobalConfigurations.REFRESHINTERVAL;
             clockRefresh.Start();
 
             clockAnimation = new System.Windows.Forms.Timer();
             clockAnimation.Tick += AnimateAll;
-            clockAnimation.Interval = 80;
+            clockAnimation.Interval = GlobalConfigurations.ANIMATIONINTERVAL;
 
+            clockUpdate.Start();
+            clockAnimation.Start();
         }
 
         public void PauseGame()
