@@ -24,6 +24,9 @@ namespace CombateMultiplayer
         System.Windows.Forms.Timer clockAnimation;
         GerenciadorDeRede server;
         GerenciadorDeRede client;
+        PowerUp PowerUp;
+        Bandeira Bandeira1;
+        Bandeira Bandeira2;
 
         Thread t;
         String IP;
@@ -71,7 +74,12 @@ namespace CombateMultiplayer
 
             Tanque1 = new Tanque(0, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
             Tanque2 = new Tanque(0.95f, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
-
+            Bandeira1 = new Bandeira(0, 0.2f);
+            Bandeira2 = new Bandeira(0.95f, 0.8f);
+            PowerUp = new PowerUp(0.5f - 0.05f, 0.55f - 0.05f);
+            Sprites.Add(Bandeira1);
+            Sprites.Add(Bandeira2);
+            Sprites.Add(PowerUp);
             Sprites.Add(Tanque1);
             Sprites.Add(Tanque2);
 

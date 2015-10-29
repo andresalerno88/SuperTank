@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace CombateMultiplayer
 {
-    class PowerUp : ProtoSprite
+    class Bandeira : ProtoSprite
     {
         TelaDeJogo Jogo;
 
-        public PowerUp(float x, float y)
-        {
+        public Bandeira(float x, float y)
+        {            
             Position.X = x;
             Position.Y = y;
             Dimension.X = 0.05f;
             Dimension.Y = 0.05f;
             geraRetanguloDeDesenho();
-            // img = (Image)Properties.Resources.ResourceManager.GetObject("Obstaculo");
+            //img = (Image)Properties.Resources.ResourceManager.GetObject("Obstaculo");
         }
-
 
     }
 }

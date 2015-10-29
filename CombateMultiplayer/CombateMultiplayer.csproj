@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bandeira.cs" />
     <Compile Include="GlobalConfigurations.cs" />
     <Compile Include="ClienteRede.cs" />
     <Compile Include="Obstaculo.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="TelaConvite.cs">
       <SubType>Form</SubType>
     </Compile>
