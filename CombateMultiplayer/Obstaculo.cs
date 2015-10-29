@@ -10,8 +10,10 @@ namespace CombateMultiplayer
     class Obstaculo:ProtoSprite
     {
         TelaDeJogo Jogo;
+        short Coluna, Fileira, Linha;
 
-        public Obstaculo(float x,float y,TelaDeJogo j)
+
+        public Obstaculo(float x,float y,TelaDeJogo j, short col, short fil, short lin)
         {
             Jogo = j;
             Position.X = x;
@@ -19,6 +21,11 @@ namespace CombateMultiplayer
             Dimension.X = 0.01f;
             Dimension.Y = 0.09f;
             geraRetanguloDeDesenho();
+
+            Coluna = col;
+            Fileira = fil;
+            Linha = lin;
+
             // img = (Image)Properties.Resources.ResourceManager.GetObject("Obstaculo");
         }
        

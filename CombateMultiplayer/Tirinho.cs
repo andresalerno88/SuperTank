@@ -12,9 +12,14 @@ namespace CombateMultiplayer
         Image img = (Image)Properties.Resources.ResourceManager.GetObject("Tiro");
         float Velocidade = 0.01f;
         TelaDeJogo Jogo;
+        public int ID;
+        public bool Local;
 
-        public Tirinho(float x,float y,int direçao,TelaDeJogo j)
+
+        public Tirinho(float x,float y,int direçao,int id,bool isLocal,TelaDeJogo j)
         {
+            ID = id;
+            Local = isLocal;
             Position.X = x;
             Position.Y = y;
             Dimension.X = 0.0125f;
@@ -47,6 +52,7 @@ namespace CombateMultiplayer
                     break;
 
             }
+            if(Local)
             colideComAlvo();
         }
 

@@ -17,6 +17,7 @@ namespace CombateMultiplayer
         public float Velocidade = 1f * (GlobalConfigurations.UPDATEINTERVAL / 1000f);
         private System.Windows.Forms.Timer clockCanhao;
         private bool canhaoAtivado = true;
+        private int TirosDisparados = 0;
 
         public Tanque(float x, float y, int direçao, TelaDeJogo j, int resoluçaoX, int resoluçaoY)
         {
@@ -135,19 +136,20 @@ namespace CombateMultiplayer
             {
                 if (canhaoAtivado)
                 {
+                    TirosDisparados++;
                     switch (Direçao)
                     {
                         case 0:
-                            Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0, Jogo));
+                            Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0,TirosDisparados,true, Jogo));
                             break;
                         case 1:
-                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, Jogo));
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, TirosDisparados, true, Jogo));
                             break;
                         case 2:
-                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, Jogo));
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, TirosDisparados, true, Jogo));
                             break;
                         case 3:
-                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, Jogo));
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, TirosDisparados, true, Jogo));
                             break;
 
                     }
