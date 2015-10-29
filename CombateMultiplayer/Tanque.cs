@@ -8,13 +8,17 @@ using System.Windows.Forms;
 
 namespace CombateMultiplayer
 {
+
+
     public class Tanque : ProtoSprite
     {
 
         public TelaDeJogo Jogo;
-        public float Velocidade = 1f *(GlobalConfigurations.UPDATEINTERVAL/1000f);
+        public float Velocidade = 1f * (GlobalConfigurations.UPDATEINTERVAL / 1000f);
+        private System.Windows.Forms.Timer clockCanhao;
+        private bool canhaoAtivado = true;
 
-        public Tanque(float x,float y,int direçao, TelaDeJogo j,int resoluçaoX,int resoluçaoY)
+        public Tanque(float x, float y, int direçao, TelaDeJogo j, int resoluçaoX, int resoluçaoY)
         {
             Jogo = j;
             Dimension.X = 0.05f;
@@ -30,38 +34,56 @@ namespace CombateMultiplayer
             RetanguloSpritesheet.Height = 90;
             numQuadrosParado = 3;
             numQuadrosMovendo = 4;
+
+            clockCanhao = new System.Windows.Forms.Timer();
+            clockCanhao.Tick += AtivaCanhao;
+            clockCanhao.Interval = 500;
+            clockCanhao.Start();
+
         }
 
-        public void Desativa() { 
-        
+        private void AtivaCanhao(object sender, EventArgs e)
+        {
+            canhaoAtivado = true;
+            clockCanhao.Stop();
+
         }
 
-        public bool colideComSólido() {
+        public void Desativa()
+        {
+
+        }
+
+        public bool colideComSólido()
+        {
             foreach (ProtoSprite p in Jogo.GetCollisions(this))
             {
-                if (p.isSolid) {
+                if (p.isSolid)
+                {
                     return true;
                 }
             }
-            return false;            
+            return false;
         }
 
 
         public void Botoes(String dedadaDetectada)
         {
-            if(dedadaDetectada == null){
+            if (dedadaDetectada == null)
+            {
 
                 isMoving = false;
             }
             if (dedadaDetectada == Keys.Down.ToString())
             {
                 isMoving = true;
-                move(0, Velocidade); 
+                move(0, Velocidade);
                 if (colideComSólido())
                 {
                     move(0, -Velocidade);
                 }
-                else if (SaiuDaTela()) {
+                else if (SaiuDaTela())
+                {
                     move(0, -Velocidade);
                 }
                 Direçao = 3;
@@ -69,7 +91,7 @@ namespace CombateMultiplayer
             if (dedadaDetectada == Keys.Up.ToString())
             {
                 isMoving = true;
-                move(0,-Velocidade);
+                move(0, -Velocidade);
                 if (colideComSólido())
                 {
                     move(0, Velocidade);
@@ -108,30 +130,37 @@ namespace CombateMultiplayer
                 }
                 Direçao = 0;
             }
+
             if (dedadaDetectada == Keys.Space.ToString())
             {
-                switch (Direçao)
+                if (canhaoAtivado)
                 {
-                    case 0:
-                        Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0,Jogo));
-                        break;
-                    case 1:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, Jogo));
-                        break;
-                    case 2:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, Jogo));
-                        break;
-                    case 3:
-                        Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, Jogo));
-                        break;
-                
+                    switch (Direçao)
+                    {
+                        case 0:
+                            Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0, Jogo));
+                            break;
+                        case 1:
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, Jogo));
+                            break;
+                        case 2:
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, Jogo));
+                            break;
+                        case 3:
+                            Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, Jogo));
+                            break;
+
+                    }
+                    canhaoAtivado = false;
+                    clockCanhao.Start();
                 }
             }
         }
 
         private bool SaiuDaTela()
         {
-            if(this.Position.X<0 || this.Position.Y <= 0.1 || this.Position.X + this.Dimension.X > 1 || this.Position.Y + this.Dimension.Y >1){
+            if (this.Position.X < 0 || this.Position.Y <= 0.1 || this.Position.X + this.Dimension.X > 1 || this.Position.Y + this.Dimension.Y > 1)
+            {
 
                 return true;
             }
