@@ -85,14 +85,14 @@ namespace CombateMultiplayer
 
             for (int v = 0; v < 10; v++)
             {
-                Sprites.Add(new Obstaculo(0.15f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.16f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.85f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.86f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.30f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.31f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.70f, 0.1f + 0.09f * v, this));
-                Sprites.Add(new Obstaculo(0.71f, 0.1f + 0.09f * v, this));
+                Sprites.Add(new Obstaculo(0.15f, 0.1f + 0.09f * v, this,1,1,(short)(v+1)));
+                Sprites.Add(new Obstaculo(0.16f, 0.1f + 0.09f * v, this,1, 2, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.85f, 0.1f + 0.09f * v, this, 2, 1, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.86f, 0.1f + 0.09f * v, this, 2, 2, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.30f, 0.1f + 0.09f * v, this, 3, 1, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.31f, 0.1f + 0.09f * v, this, 3, 2, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.70f, 0.1f + 0.09f * v, this, 4, 1, (short)(v + 1)));
+                Sprites.Add(new Obstaculo(0.71f, 0.1f + 0.09f * v, this, 4, 2, (short)(v + 1)));
             }
         }
 
@@ -126,8 +126,8 @@ namespace CombateMultiplayer
             clockAnimation.Tick += AnimateAll;
             clockAnimation.Interval = GlobalConfigurations.ANIMATIONINTERVAL;
 
-            clockUpdate.Start();
-            clockAnimation.Start();
+           // clockUpdate.Start();
+           // clockAnimation.Start();
         }
 
         public void PauseGame()
