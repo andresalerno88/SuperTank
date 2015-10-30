@@ -302,10 +302,10 @@ namespace CombateMultiplayer
                     direction = 'C';
                     break;
                 case 2:
-                    direction = 'B';
+                    direction = 'D';
                     break;
                 case 3:
-                    direction = 'D';
+                    direction = 'B';
                     break;
             }
 
