@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CombateMultiplayer
 {
-    class Obstaculo:ProtoSprite
+    public class Obstaculo:ProtoSprite
     {
         TelaDeJogo Jogo;
-        short Coluna, Fileira, Linha;
+        public short Coluna, Fileira, Linha;
 
 
         public Obstaculo(float x,float y,TelaDeJogo j, short col, short fil, short lin)

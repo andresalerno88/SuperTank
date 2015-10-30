@@ -204,6 +204,57 @@ namespace CombateMultiplayer
             }
         }
 
+        public void DestroiObjetoRemoto(ProtoSprite p1,ProtoSprite p2, int id) { 
+            
+            Obstaculo o = (Obstaculo)p2;
+            switch (tanqueLocal)
+            {                    
+                case 1:
+                    server.EnviaMensagem15("T", "BL" + o.Coluna + o.Fileira + string.Format("{0:00}",o.Linha),id);
+                    break;
+                case 2:
+                    client.EnviaMensagem15("T", "BL" + o.Coluna + o.Fileira + string.Format("{0:00}", o.Linha), id);
+                    break;
+                    
+            }
+        }
+
+        public void DestroiTiro(int id) {
+            foreach (ProtoSprite p in Sprites)
+            {
+                if (p is Tirinho)
+                {
+                    Tirinho t = (Tirinho)p;
+                    if (!t.Local) {
+                        if (t.ID == id)
+                        {
+                            SpritesASeremDeletados.Add(t);
+                        }
+                    }
+                }
+            }
+        
+        }
+
+        public void DestroiObstaculo(short col,short fil,short lin) {
+            foreach (ProtoSprite p in Sprites)
+            {
+                if (p is Obstaculo)
+                {
+                    Obstaculo o = (Obstaculo)p;
+                    if (o.Coluna == col)
+                    {
+                        if (o.Fileira == fil)
+                        {
+                            if (o.Linha == lin)
+                            {                                
+                             SpritesASeremDeletados.Add(o);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         private void UpdateObjects()
         {

@@ -68,6 +68,7 @@ namespace CombateMultiplayer
                 if (p is Obstaculo)
                 {
                     Destroi(p);
+                    Jogo.DestroiObjetoRemoto(this, p, ID);
                     Destroi(this);
                 }
 

@@ -178,6 +178,12 @@ namespace CombateMultiplayer
 
                             break;
                         }
+                    case 15:
+                        {
+                            RecebimentoMensagem15(new String(msg));
+
+                            break;
+                        }
 
                 }
             }
@@ -242,6 +248,23 @@ namespace CombateMultiplayer
             EnviaMensagem12(posX, posY, dir);
         }
 
+        private void RecebimentoMensagem15(string str)
+        {
+            string[] strings = str.Split(new Char[] { '|' });
+            string obj1, obj2;
+            int id;
+            obj1= strings[0];
+            obj2= strings[1];
+            id = int.Parse(strings[2]);
+
+            if (obj2[0] == 'B') {
+                Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()),(short)(int.Parse( obj2[4].ToString())*10 +int.Parse(obj2[5].ToString())));
+                Tanque.Jogo.DestroiTiro(id);
+            }
+
+        }
+
+
         public void EnviaMensagem10()
         {
             byte[] byteMsg = Encoding.ASCII.GetBytes("10005");
@@ -292,6 +315,18 @@ namespace CombateMultiplayer
             FilaDeMensagens.Enqueue(byteMsg);
 
         }
+
+        public void EnviaMensagem15(string str1, string str2, int id)
+        {
+            string msg = (str1 + "|" + str2 + "|" + id);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("15" + string.Format("{0:000}", msg.Length + 5) + msg);
+
+            FilaDeMensagens.Enqueue(byteMsg);
+
+        }
+
+
+        
 
         void Comunica1(){            
 
@@ -361,6 +396,8 @@ namespace CombateMultiplayer
         {
             TeclaPressionada = tecla;
         }
+
+        
     }
 }
 
