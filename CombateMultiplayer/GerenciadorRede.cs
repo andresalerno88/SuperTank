@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CombateMultiplayer
 {
-    class GerenciadorDeRede
+    public class GerenciadorDeRede
     {
         private string TeclaPressionada;
         private const int BUFFER_SIZE = 1024;
@@ -134,7 +134,7 @@ namespace CombateMultiplayer
         {
 
             int bytesReceived = stream.Read(byteStream, 0, BUFFER_SIZE);
-            Tanque.Botoes(Encoding.ASCII.GetString(byteStream, 0, bytesReceived));
+            Tanque.InputMovimentação(Encoding.ASCII.GetString(byteStream, 0, bytesReceived));
 
         }
 
@@ -172,6 +172,12 @@ namespace CombateMultiplayer
 
                             break;
                         }
+                    case 13:
+                        {
+                            RecebimentoMensagem13(new String(msg));
+
+                            break;
+                        }
 
                 }
             }
@@ -196,6 +202,46 @@ namespace CombateMultiplayer
             EnviaMensagem12(posX,posY,dir);
         }
 
+        private void RecebimentoMensagem13(string str)
+        {
+            string[] strings = str.Split(new Char[] { '|' });
+            float posX, posY;
+            int dir = 0,id;
+            char direction;
+
+            posX = float.Parse(strings[0]);
+            posY = float.Parse(strings[1]);
+            direction = char.Parse(strings[2]);
+            id = int.Parse(strings[3]);
+
+            switch (direction)
+            {
+                case 'E':
+                    {
+                        dir = 0;
+                        break;
+                    }
+                case 'C':
+                    {
+                        dir = 1;
+                        break;
+                    }
+                case 'D':
+                    {
+                        dir = 2;
+                        break;
+                    }
+                case 'B':
+                    {
+                        dir = 3;
+                        break;
+                    }
+            }
+            Tanque.Jogo.Sprites.Add(new Tirinho(posX, posY, dir, id, false, Tanque.Jogo));
+            Tanque.moveTo(posX, posY, dir);
+            EnviaMensagem12(posX, posY, dir);
+        }
+
         public void EnviaMensagem10()
         {
             byte[] byteMsg = Encoding.ASCII.GetBytes("10005");
@@ -216,6 +262,32 @@ namespace CombateMultiplayer
         {
             string msg = (posX + "|" + posY + "|" + dir);
             byte[] byteMsg = Encoding.ASCII.GetBytes("12" + string.Format("{0:000}", msg.Length + 5) + msg);
+
+            FilaDeMensagens.Enqueue(byteMsg);
+
+        }
+
+        public void EnviaMensagem13(float posX, float posY, int dir,int id)
+        {
+            char direction='?';
+            switch (dir)
+            {
+                case 0:
+                    direction = 'E';
+                    break;
+                case 1:
+                    direction = 'C';
+                    break;
+                case 2:
+                    direction = 'B';
+                    break;
+                case 3:
+                    direction = 'D';
+                    break;
+            }
+
+            string msg = (posX + "|" + posY + "|" + direction +"|"+id);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("13" + string.Format("{0:000}", msg.Length + 5) + msg);
 
             FilaDeMensagens.Enqueue(byteMsg);
 

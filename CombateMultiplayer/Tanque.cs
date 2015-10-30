@@ -14,6 +14,7 @@ namespace CombateMultiplayer
     {
 
         public TelaDeJogo Jogo;
+        public GerenciadorDeRede Rede;
         public float Velocidade = 1f * (GlobalConfigurations.UPDATEINTERVAL / 1000f);
         private System.Windows.Forms.Timer clockCanhao;
         private bool canhaoAtivado = true;
@@ -68,11 +69,10 @@ namespace CombateMultiplayer
         }
 
 
-        public void Botoes(String dedadaDetectada)
+        public void InputMovimentação(String dedadaDetectada)
         {
             if (dedadaDetectada == null)
             {
-
                 isMoving = false;
             }
             if (dedadaDetectada == Keys.Down.ToString())
@@ -131,8 +131,11 @@ namespace CombateMultiplayer
                 }
                 Direçao = 0;
             }
+           
+        }
 
-            if (dedadaDetectada == Keys.Space.ToString())
+        public void InputTiro(bool spacePressed) {
+             if (spacePressed)
             {
                 if (canhaoAtivado)
                 {
@@ -140,16 +143,20 @@ namespace CombateMultiplayer
                     switch (Direçao)
                     {
                         case 0:
-                            Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0,TirosDisparados,true, Jogo));
+                            Jogo.Sprites.Add(new Tirinho(Position.X - 0.012f, Position.Y + 0.015f, 0, TirosDisparados, true, Jogo));
+                            Rede.EnviaMensagem13(Position.X - 0.012f, Position.Y + 0.015f, 0, TirosDisparados);
                             break;
                         case 1:
                             Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + -0.012f, 1, TirosDisparados, true, Jogo));
+                            Rede.EnviaMensagem13(Position.X + 0.015f, Position.Y + -0.012f, 1, TirosDisparados);
                             break;
                         case 2:
                             Jogo.Sprites.Add(new Tirinho(Position.X + 0.052f, Position.Y + 0.015f, 2, TirosDisparados, true, Jogo));
+                            Rede.EnviaMensagem13(Position.X + 0.052f, Position.Y + 0.015f, 2, TirosDisparados);
                             break;
                         case 3:
                             Jogo.Sprites.Add(new Tirinho(Position.X + 0.015f, Position.Y + 0.052f, 3, TirosDisparados, true, Jogo));
+                            Rede.EnviaMensagem13(Position.X + 0.015f, Position.Y + 0.052f, 3, TirosDisparados);
                             break;
 
                     }
@@ -157,6 +164,7 @@ namespace CombateMultiplayer
                     clockCanhao.Start();
                 }
             }
+        
         }
 
         private bool SaiuDaTela()

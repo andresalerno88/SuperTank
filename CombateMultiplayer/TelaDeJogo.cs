@@ -36,6 +36,7 @@ namespace CombateMultiplayer
         int Porto;
 
         Stack<string> TeclasDeMovimentoPressionada;
+        bool SpacePressed = false;
 
         const int DimensaoDaTelaX = 800, DimensaoDaTelaY = 600;
 
@@ -126,8 +127,8 @@ namespace CombateMultiplayer
             clockAnimation.Tick += AnimateAll;
             clockAnimation.Interval = GlobalConfigurations.ANIMATIONINTERVAL;
 
-           // clockUpdate.Start();
-           // clockAnimation.Start();
+            clockUpdate.Start();
+            clockAnimation.Start();
         }
 
         public void PauseGame()
@@ -155,11 +156,13 @@ namespace CombateMultiplayer
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
                     server.inicia();
+                    Tanque1.Rede = server;
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque1, Porto, IP, true);
                     client.EnviaMensagem10();
                     client.Comunica2();
+                    Tanque2.Rede = client;
                     break;
             }
         }
@@ -212,11 +215,13 @@ namespace CombateMultiplayer
             {
                     
                 case 1:
-                    Tanque1.Botoes(TeclasDeMovimentoPressionada.Peek());
+                    Tanque1.InputMovimentação(TeclasDeMovimentoPressionada.Peek());
+                    Tanque1.InputTiro(SpacePressed);
                     server.recebeTecla(TeclasDeMovimentoPressionada.Peek());
                     break;
                 case 2:
-                    Tanque2.Botoes(TeclasDeMovimentoPressionada.Peek());
+                    Tanque2.InputMovimentação(TeclasDeMovimentoPressionada.Peek());
+                    Tanque2.InputTiro(SpacePressed);
                     client.recebeTecla(TeclasDeMovimentoPressionada.Peek());
                     break;
                     }
@@ -241,9 +246,17 @@ namespace CombateMultiplayer
 
         private void TeclaPressionada(object sender, KeyEventArgs e)
         {
-            if (!TeclasDeMovimentoPressionada.Contains(e.KeyCode.ToString()))
+            string tecla = e.KeyCode.ToString();
+            if (tecla == "Left" || tecla == "Right" || tecla == "Down" || tecla == "Up")
             {
-                TeclasDeMovimentoPressionada.Push(e.KeyCode.ToString());
+                if (!TeclasDeMovimentoPressionada.Contains(e.KeyCode.ToString()))
+                {
+                    TeclasDeMovimentoPressionada.Push(e.KeyCode.ToString());
+                }
+            }
+            if (tecla == Keys.Space.ToString())
+            {
+                SpacePressed = true;
             }
         }
 
@@ -252,6 +265,12 @@ namespace CombateMultiplayer
             List<string> a = new List<string>(TeclasDeMovimentoPressionada);
             a.Remove(e.KeyCode.ToString());
             TeclasDeMovimentoPressionada = new Stack<string>(a);
+
+            if (e.KeyCode.ToString() == Keys.Space.ToString())
+            {
+                SpacePressed = false;
+            }
+
         }
 
 
