@@ -111,6 +111,7 @@ namespace CombateMultiplayer
 
             InicializaObjetos();
             TeclasDeMovimentoPressionada = new Stack<string>();
+            TeclasDeMovimentoPressionada.Push("NADA");
             t = new Thread(CriaRede);
             t.Start();
 
@@ -127,8 +128,6 @@ namespace CombateMultiplayer
             clockAnimation.Tick += AnimateAll;
             clockAnimation.Interval = GlobalConfigurations.ANIMATIONINTERVAL;
 
-            clockUpdate.Start();
-            clockAnimation.Start();
         }
 
         public void PauseGame()
@@ -155,14 +154,16 @@ namespace CombateMultiplayer
             {
                 case 1:
                     server = new GerenciadorDeRede(Tanque2,Porto,null,false);
-                    server.inicia();
                     Tanque1.Rede = server;
+                    Tanque2.Rede = server;
+                    server.inicia();
                     break;
                 case 2:
                     client = new GerenciadorDeRede(Tanque1, Porto, IP, true);
+                    Tanque2.Rede = client;
+                    Tanque1.Rede = client;
                     client.EnviaMensagem10();
                     client.Comunica2();
-                    Tanque2.Rede = client;
                     break;
             }
         }
