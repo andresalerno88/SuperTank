@@ -319,10 +319,24 @@ namespace CombateMultiplayer
 
         private void TeclaLiberada(object sender, KeyEventArgs e)
         {
+            Stack<string>temp = new Stack<string>();
+            foreach (string str in TeclasDeMovimentoPressionada)
+            {
+                if (e.KeyCode.ToString()!= str)
+                {                    
+                temp.Push(str);
+                }
+            }
+            TeclasDeMovimentoPressionada.Clear();
+            foreach (string str in temp)
+            {
+                TeclasDeMovimentoPressionada.Push(str);                
+            }
+            /*
             List<string> a = new List<string>(TeclasDeMovimentoPressionada);
             a.Remove(e.KeyCode.ToString());
             TeclasDeMovimentoPressionada = new Stack<string>(a);
-
+            */
             if (e.KeyCode.ToString() == Keys.Space.ToString())
             {
                 SpacePressed = false;

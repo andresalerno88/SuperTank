@@ -101,13 +101,13 @@ namespace CombateMultiplayer
         }
 
 
-        public void InputMovimentação(String dedadaDetectada)
+        public void InputMovimentação(String keyPressed)
         {
-            if (dedadaDetectada == null)
+            if (keyPressed == null)
             {
                 isMoving = false;
             }
-            if (dedadaDetectada == Keys.Down.ToString())
+            if (keyPressed == Keys.Down.ToString())
             {
                 isMoving = true;
                 move(0, Velocidade);
@@ -121,7 +121,7 @@ namespace CombateMultiplayer
                 }
                 Direçao = 3;
             }
-            if (dedadaDetectada == Keys.Up.ToString())
+            if (keyPressed == Keys.Up.ToString())
             {
                 isMoving = true;
                 move(0, -Velocidade);
@@ -135,7 +135,7 @@ namespace CombateMultiplayer
                 }
                 Direçao = 1;
             }
-            if (dedadaDetectada == Keys.Right.ToString())
+            if (keyPressed == Keys.Right.ToString())
             {
                 isMoving = true;
                 move(Velocidade, 0);
@@ -149,7 +149,7 @@ namespace CombateMultiplayer
                 }
                 Direçao = 2;
             }
-            if (dedadaDetectada == Keys.Left.ToString())
+            if (keyPressed == Keys.Left.ToString())
             {
                 isMoving = true;
                 move(-Velocidade, 0);
