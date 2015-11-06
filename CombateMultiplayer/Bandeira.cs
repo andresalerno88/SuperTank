@@ -10,13 +10,17 @@ namespace CombateMultiplayer
     {
         TelaDeJogo Jogo;
 
-        public Bandeira(float x, float y)
+        public int Dono;
+
+        public Bandeira(float x, float y,int dono)
         {            
             Position.X = x;
             Position.Y = y;
             Dimension.X = 0.05f;
             Dimension.Y = 0.05f;
             geraRetanguloDeDesenho();
+            Dono = dono;
+            isSolid = false;
             //img = (Image)Properties.Resources.ResourceManager.GetObject("Obstaculo");
         }
 
