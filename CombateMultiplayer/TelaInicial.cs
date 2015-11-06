@@ -235,7 +235,10 @@ namespace CombateMultiplayer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EnviaMsg03(Jogadores[comboBox1.SelectedIndex].IP);
+            if (comboBox1.SelectedIndex != -1)
+            {                
+                EnviaMsg03(Jogadores[comboBox1.SelectedIndex].IP);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

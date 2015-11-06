@@ -18,7 +18,7 @@ namespace CombateMultiplayer
         Graphics desenhista;
         Tanque Tanque1;
         Tanque Tanque2;
-        int tanqueLocal;
+        public int tanqueLocal;
         System.Windows.Forms.Timer clockUpdate;
         System.Windows.Forms.Timer clockRefresh;
         System.Windows.Forms.Timer clockAnimation;
@@ -75,8 +75,8 @@ namespace CombateMultiplayer
 
             Tanque1 = new Tanque(0, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
             Tanque2 = new Tanque(0.95f, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
-            Bandeira1 = new Bandeira(0, 0.2f);
-            Bandeira2 = new Bandeira(0.95f, 0.8f);
+            Bandeira1 = new Bandeira(0, 0.2f,1);
+            Bandeira2 = new Bandeira(0.95f, 0.8f,2);
             PowerUp = new PowerUp(0.5f - 0.05f, 0.55f - 0.05f);
             Sprites.Add(Bandeira1);
             Sprites.Add(Bandeira2);
@@ -234,6 +234,11 @@ namespace CombateMultiplayer
                 }
             }
         
+        }
+
+        public void DestroiSprite(ProtoSprite p)
+        {            
+            SpritesASeremDeletados.Add(p); 
         }
 
         public void DestroiObstaculo(short col,short fil,short lin) {

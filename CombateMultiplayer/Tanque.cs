@@ -15,10 +15,13 @@ namespace CombateMultiplayer
 
         public TelaDeJogo Jogo;
         public GerenciadorDeRede Rede;
-        public float Velocidade = 1f * (GlobalConfigurations.UPDATEINTERVAL / 1000f);
+        public float Velocidade = 0.1f * (GlobalConfigurations.UPDATEINTERVAL / 100f);
         private System.Windows.Forms.Timer clockCanhao;
         private bool canhaoAtivado = true;
         private int TirosDisparados = 0;
+        public bool HasBandeira;
+        public bool HasPowerUP;
+        
 
         public Tanque(float x, float y, int direçao, TelaDeJogo j, int resoluçaoX, int resoluçaoY)
         {
@@ -44,6 +47,12 @@ namespace CombateMultiplayer
 
         }
 
+        private void ExpiraPowerUp()
+        {
+            HasPowerUP = false;
+            Velocidade = 0.1f * (GlobalConfigurations.UPDATEINTERVAL / 100f);
+        }
+
         private void AtivaCanhao(object sender, EventArgs e)
         {
             canhaoAtivado = true;
@@ -64,8 +73,31 @@ namespace CombateMultiplayer
                 {
                     return true;
                 }
+                if(p is Bandeira){
+                    PegaBandeira((Bandeira)p);
+                }
+                if(p is PowerUp){
+                    PegaPowerUp((PowerUp)p);
+                }
+
             }
             return false;
+        }
+
+        private void PegaPowerUp(PowerUp p)
+        {
+            HasPowerUP = true;
+            Velocidade = 0.15f * (GlobalConfigurations.UPDATEINTERVAL / 100f);
+            Jogo.DestroiSprite(p);
+            
+        }
+
+        private void PegaBandeira(Bandeira b)
+        {
+            if(b.Dono != Jogo.tanqueLocal){
+                Jogo.DestroiSprite(b);
+            }
+
         }
 
 

@@ -17,6 +17,7 @@ namespace CombateMultiplayer
             Dimension.X = 0.05f;
             Dimension.Y = 0.05f;
             geraRetanguloDeDesenho();
+            isSolid = false;
             // img = (Image)Properties.Resources.ResourceManager.GetObject("Obstaculo");
         }
 
