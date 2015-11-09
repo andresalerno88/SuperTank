@@ -258,15 +258,23 @@ namespace CombateMultiplayer
 
             if (obj2[0] == 'B')
             {
-                id = int.Parse(strings[2]);
-                Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()),(short)(int.Parse( obj2[4].ToString())*10 +int.Parse(obj2[5].ToString())));
-                Tanque.Jogo.DestroiTiro(id);
+                if (obj2[1] == 'L')
+                {
+                    id = int.Parse(strings[2]);
+                    Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()), (short)(int.Parse(obj2[4].ToString()) * 10 + int.Parse(obj2[5].ToString())));
+                    Tanque.Jogo.DestroiTiro(id);
+                }
+                else {
+                    Tanque.Jogo.DestroiBandeira(int.Parse(obj2[1].ToString()));
+                }
             }
-
             if (obj2 == "CE")
             {
-                Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()), (short)(int.Parse(obj2[4].ToString()) * 10 + int.Parse(obj2[5].ToString())));
-                Tanque.Jogo.DestroiTiro(id);
+                Tanque.Jogo.DestroiCelula();
+            }
+
+            if (obj2 == "")
+            {
             }
 
         }
