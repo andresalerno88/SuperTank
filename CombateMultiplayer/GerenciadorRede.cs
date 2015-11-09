@@ -255,9 +255,10 @@ namespace CombateMultiplayer
             int id;
             obj1= strings[0];
             obj2= strings[1];
-            id = int.Parse(strings[2]);
 
-            if (obj2[0] == 'B') {
+            if (obj2[0] == 'B')
+            {
+                id = int.Parse(strings[2]);
                 Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()),(short)(int.Parse( obj2[4].ToString())*10 +int.Parse(obj2[5].ToString())));
                 Tanque.Jogo.DestroiTiro(id);
             }

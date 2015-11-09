@@ -76,8 +76,7 @@ namespace CombateMultiplayer
             }
             if (contato)
             {
-            Destroi(this);
-                
+                Destroi(this);                
             }
             return false;
         }
