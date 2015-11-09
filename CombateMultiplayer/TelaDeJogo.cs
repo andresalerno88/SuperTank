@@ -75,8 +75,8 @@ namespace CombateMultiplayer
 
             Tanque1 = new Tanque(0, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
             Tanque2 = new Tanque(0.95f, 0.6f, 2, this, DimensaoDaTelaX, DimensaoDaTelaY);
-            Bandeira1 = new Bandeira(0, 0.2f,1);
-            Bandeira2 = new Bandeira(0.95f, 0.8f,2);
+            Bandeira1 = new Bandeira(0.02f, 0.85f,1);
+            Bandeira2 = new Bandeira(0.95f, 0.2f,2);
             PowerUp = new PowerUp(0.5f - 0.05f, 0.55f - 0.05f);
             Sprites.Add(Bandeira1);
             Sprites.Add(Bandeira2);
