@@ -326,6 +326,15 @@ namespace CombateMultiplayer
         }
 
 
+        public void EnviaMensagem15(string str1, string str2)
+        {
+            string msg = (str1 + "|" + str2);
+            byte[] byteMsg = Encoding.ASCII.GetBytes("15" + string.Format("{0:000}", msg.Length + 5) + msg);
+
+            FilaDeMensagens.Enqueue(byteMsg);
+
+        }
+
         
 
         void Comunica1(){            

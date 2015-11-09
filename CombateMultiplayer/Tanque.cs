@@ -89,13 +89,17 @@ namespace CombateMultiplayer
             HasPowerUP = true;
             Velocidade = 0.15f * (GlobalConfigurations.UPDATEINTERVAL / 100f);
             Jogo.DestroiSprite(p);
+
+            Rede.EnviaMensagem15("J" + Jogo.tanqueLocal.ToString(), "CE" );
             
         }
 
         private void PegaBandeira(Bandeira b)
         {
             if(b.Dono != Jogo.tanqueLocal){
-                Jogo.DestroiSprite(b);
+                Jogo.DestroiSprite(b);           
+
+                Rede.EnviaMensagem15("J"+Jogo.tanqueLocal.ToString(),"B"+b.Dono.ToString());
             }
 
         }
