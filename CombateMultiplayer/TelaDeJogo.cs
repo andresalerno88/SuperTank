@@ -204,6 +204,33 @@ namespace CombateMultiplayer
             }
         }
 
+        public void DestroiBandeira(int i) {
+            foreach (ProtoSprite p in Sprites)
+            {
+                if (p is Bandeira)
+                {
+                    if (((Bandeira)p).Dono == i)
+                    {
+                        DestroiSprite(p);
+                    }
+                }
+            }
+        
+        }
+
+        public void DestroiCelula()
+        {
+            foreach (ProtoSprite p in Sprites)
+            {
+                if (p is PowerUp)
+                {
+                        DestroiSprite(p);
+                   
+                }
+            }
+
+        }
+
         public void DestroiObjetoRemoto(ProtoSprite p1,ProtoSprite p2, int id) { 
             
             Obstaculo o = (Obstaculo)p2;
@@ -218,6 +245,7 @@ namespace CombateMultiplayer
                     
             }
         }
+
 
         public void DestroiTiro(int id) {
             foreach (ProtoSprite p in Sprites)

@@ -262,6 +262,12 @@ namespace CombateMultiplayer
                 Tanque.Jogo.DestroiTiro(id);
             }
 
+            if (obj2 == "CE")
+            {
+                Tanque.Jogo.DestroiObstaculo(short.Parse(obj2[2].ToString()), short.Parse(obj2[3].ToString()), (short)(int.Parse(obj2[4].ToString()) * 10 + int.Parse(obj2[5].ToString())));
+                Tanque.Jogo.DestroiTiro(id);
+            }
+
         }
 
 
