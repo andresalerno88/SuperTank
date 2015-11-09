@@ -58,6 +58,7 @@ namespace CombateMultiplayer
 
         public bool colideComAlvo()
         {
+            bool contato = false;
             foreach (ProtoSprite p in Jogo.GetCollisions(this))
             {
                 if (p is Tanque)
@@ -69,9 +70,14 @@ namespace CombateMultiplayer
                 {
                     Destroi(p);
                     Jogo.DestroiObjetoRemoto(this, p, ID);
-                    Destroi(this);
+                    
                 }
-
+                contato = true;
+            }
+            if (contato)
+            {
+            Destroi(this);
+                
             }
             return false;
         }
